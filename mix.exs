@@ -30,7 +30,8 @@ defmodule Fpb.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:httpotion, "~> 2.2.0"},
+    [{:floki, "~> 0.8"},
+     {:httpotion, "~> 2.2.0"},
      {:phoenix, "~> 1.1.4"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_ecto, "~> 2.0"},
