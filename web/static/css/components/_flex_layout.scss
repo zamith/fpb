@@ -1,0 +1,15 @@
+.FlexLayout {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.FlexLayout.FlexLayout--spaced {
+  > * {
+    margin-right: $base-spacing;
+    margin-bottom: $base-spacing;
+  }
+}
+
+.FlexLayout.FlexLayout--centered {
+  align-items: center;
+}

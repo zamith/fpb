@@ -1,0 +1,8 @@
+h1.Title.u-pushBottom = gettext "Clubs"
+
+ul.FlexLayout.FlexLayout--spaced
+  = for club <- @clubs do
+    li.Card
+      .FlexLayout.FlexLayout--centered
+        img.Card-image src="#{club.logo_url}"
+        = club.name

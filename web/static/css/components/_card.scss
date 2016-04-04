@@ -1,0 +1,11 @@
+$Card-height: 50px;
+
+.Card {
+  border: 1px solid #000;
+  padding: $base-spacing;
+}
+
+.Card-image {
+  max-height: $Card-height;
+  margin-right: $small-spacing;
+}

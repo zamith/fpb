@@ -1,0 +1,7 @@
+<h1 class="Title u-pushBottom"><%= gettext "Teams" %></h1>
+
+<ul class="FlexLayout FlexLayout--spaced">
+  <%= for team <- @teams do %>
+    <li class="Card"><%= team.name %></li>
+  <% end %>
+</ul>
