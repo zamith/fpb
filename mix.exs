@@ -17,9 +17,21 @@ defmodule Fpb.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Fpb, []},
-     applications: [:hound, :phoenix, :phoenix_html, :cowboy,
-       :logger, :gettext, :phoenix_ecto, :postgrex]]
+    [
+      mod: {Fpb, []},
+      applications: [
+       :cowboy,
+       :gettext,
+       :hound,
+       :logger,
+       :phoenix,
+       :phoenix_ecto,
+       :phoenix_html,
+       :postgrex,
+       :timex,
+       :tzdata
+      ]
+    ]
   end
 
   # Specifies which paths to compile per environment.
@@ -30,15 +42,18 @@ defmodule Fpb.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:hound, "~> 0.8"},
-     {:phoenix, "~> 1.1.4"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_ecto, "~> 2.0"},
-     {:phoenix_html, "~> 2.4"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:phoenix_slime, "~> 0.5.1"},
-     {:gettext, "~> 0.9"},
-     {:cowboy, "~> 1.0"}]
+    [
+      {:cowboy, "~> 1.0"},
+      {:gettext, "~> 0.9"},
+      {:hound, "~> 0.8"},
+      {:phoenix, "~> 1.1.4"},
+      {:phoenix_ecto, "~> 2.0"},
+      {:phoenix_html, "~> 2.4"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_slime, "~> 0.5.1"},
+      {:postgrex, ">= 0.0.0"},
+      {:timex, "~> 2.1"}
+    ]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

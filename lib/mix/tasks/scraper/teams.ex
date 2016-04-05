@@ -7,8 +7,11 @@ defmodule Mix.Tasks.Scrapper.Teams do
 
   def run(_args) do
     Repo.start_link
+    Application.ensure_all_started(:tzdata)
     with_hound_session fn ->
-      1..100 |> Enum.each(&(add_club(&1)))
+      Scraper.Club.scrape(2404)
+      IO.inspect Scraper.Club.active?
+      # 1..100 |> Enum.each(&(add_club(&1)))
     end
   end
 
@@ -19,8 +22,9 @@ defmodule Mix.Tasks.Scrapper.Teams do
       website_id: club_id,
       logo_url: Scraper.Club.logo
     })
-    if changeset.valid? do
+    if Scrapper.Club.active? && changeset.valid? do
       Repo.insert(changeset)
+      interesting_teams |> Enum.each(&(add_team(&1)))
     end
   end
 
@@ -35,6 +39,10 @@ defmodule Mix.Tasks.Scrapper.Teams do
     if changeset.valid? do
       Repo.insert(changeset)
     end
+  end
+
+  defp interesting_teams do
+    Scraper.Club.interesting_team_ids
   end
 
   defp with_hound_session(block) do

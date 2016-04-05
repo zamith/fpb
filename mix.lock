@@ -1,4 +1,5 @@
 %{"certifi": {:hex, :certifi, "0.4.0"},
+  "combine": {:hex, :combine, "0.7.0"},
   "connection": {:hex, :connection, "1.0.2"},
   "cowboy": {:hex, :cowboy, "1.0.4"},
   "cowlib": {:hex, :cowlib, "1.0.2"},
@@ -28,4 +29,6 @@
   "postgrex": {:hex, :postgrex, "0.11.1"},
   "ranch": {:hex, :ranch, "1.2.1"},
   "slime": {:hex, :slime, "0.11.0"},
-  "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.0"}}
+  "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.0"},
+  "timex": {:hex, :timex, "2.1.4"},
+  "tzdata": {:hex, :tzdata, "0.5.7"}}
