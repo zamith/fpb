@@ -2,15 +2,20 @@ defmodule Fpb.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :fpb,
-     version: "0.0.1",
-     elixir: "~> 1.0",
-     elixirc_paths: elixirc_paths(Mix.env),
-     compilers: [:phoenix, :gettext] ++ Mix.compilers,
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     aliases: aliases,
-     deps: deps]
+    [
+      app: :fpb,
+      version: "0.0.1",
+      elixir: "~> 1.0",
+      elixirc_paths: elixirc_paths(Mix.env),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers,
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      aliases: aliases,
+      deps: deps,
+      preferred_cli_env: [
+        vcr: :test, "vcr.delete": :test, "vcr.check": :test, "vcr.show": :test
+      ],
+    ]
   end
 
   # Configuration for the OTP application.
@@ -49,10 +54,11 @@ defmodule Fpb.Mixfile do
       {:phoenix, "~> 1.1.4"},
       {:phoenix_ecto, "~> 2.0"},
       {:phoenix_html, "~> 2.4"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:phoenix_slime, "~> 0.5.1"},
       {:postgrex, ">= 0.0.0"},
-      {:timex, "~> 2.1"}
+      {:timex, "~> 2.1"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:exvcr, "~> 0.7", only: :test}
     ]
   end
 

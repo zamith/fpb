@@ -17,3 +17,11 @@ config :fpb, Fpb.Repo,
   database: "fpb_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :exvcr, [
+  filter_sensitive_data: [
+    [pattern: "<PASSWORD>.+</PASSWORD>", placeholder: "PASSWORD_PLACEHOLDER"]
+  ],
+  filter_url_params: false,
+  response_headers_blacklist: []
+]
