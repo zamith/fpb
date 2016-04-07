@@ -6,6 +6,7 @@ defmodule Fpb.Repo.Migrations.CreateTeam do
       add :name, :string
       add :website_id, :integer
       add :level, :string
+      add :club_id, references(:clubs)
 
       timestamps
     end

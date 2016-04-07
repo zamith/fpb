@@ -5,6 +5,7 @@ defmodule Fpb.Team do
     field :name, :string
     field :website_id, :integer
     field :level, :string
+    belongs_to :club, Fpb.Club
 
     timestamps
   end
