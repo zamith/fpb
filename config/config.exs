@@ -12,7 +12,8 @@ config :fpb, Fpb.Endpoint,
   secret_key_base: "nBZKIY8PVPoZhhFBI9Ssfh03AQFgpFapRAbCKakDY0TYy0yAvd4LZweN4l+HLSV6",
   render_errors: [accepts: ~w(html json)],
   pubsub: [name: Fpb.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+           adapter: Phoenix.PubSub.PG2],
+  http: [port: {:system, "PORT"}]
 
 # Configures Elixir's Logger
 config :logger, :console,

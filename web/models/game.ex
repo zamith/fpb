@@ -1,17 +1,17 @@
-defmodule Fpb.Club do
+defmodule Fpb.Game do
   use Fpb.Web, :model
 
-  schema "clubs" do
-    field :name, :string
-    field :website_id, :integer
-    field :logo_url, :string
-    has_many :teams, Fpb.Team
+  schema "games" do
+    field :date, Timex.Ecto.DateTime
+    field :gym, :string
+    belongs_to :home_team, Fpb.Team
+    belongs_to :away_team, Fpb.Team
 
     timestamps
   end
 
-  @required_fields ~w(name website_id)
-  @optional_fields ~w(logo_url)
+  @required_fields ~w(date gym)
+  @optional_fields ~w()
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -22,6 +22,7 @@ defmodule Fpb.Club do
   def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
-    |> unique_constraint(:name)
+    |> assoc_constraint(:home_team)
+    |> assoc_constraint(:away_team)
   end
 end

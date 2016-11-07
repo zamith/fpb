@@ -6,9 +6,9 @@ defmodule Fpb.TeamsScrapperTaskTest do
 
   test "adds a club that is active" do
     use_cassette "one_active_club" do
+      HTTPoison.start
       Mix.Tasks.Scraper.Teams.run([])
 
-      IO.inspect Club |> Repo.all
       club = Repo.one(from c in Club, order_by: [desc: c.id], limit: 1)
       assert club != nil
     end

@@ -19,8 +19,9 @@ defmodule Fpb.Router do
     get "/", ClubsController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Fpb do
-  #   pipe_through :api
-  # end
+  scope "/api", Fpb do
+    pipe_through :api
+
+    resources "/teams", Fpb.Api.TeamsController, only: [:show]
+  end
 end

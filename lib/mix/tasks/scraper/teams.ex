@@ -7,14 +7,15 @@ defmodule Mix.Tasks.Scraper.Teams do
   alias Fpb.Club
 
   def run(_args) do
-    Repo.start_link
+    # Repo.start_link
     Application.ensure_all_started(:tzdata)
     with_hound_session fn ->
-      1..100 |> Enum.each(&add_club/1)
+      # 1..100 |> Enum.each(&add_club/1)
+      add_club(2404)
     end
   end
 
-  defp add_club(club_id) do
+  def add_club(club_id) do
     Scraper.Club.scrape(club_id)
 
     changeset = club_with_name(Scraper.Club.name)
@@ -24,7 +25,7 @@ defmodule Mix.Tasks.Scraper.Teams do
     })
 
     if Scraper.Club.active? && changeset.valid? do
-      {:ok, club} = Repo.insert_or_update(changeset)
+      club = Repo.insert_or_update!(changeset)
       Scraper.Club.interesting_team_ids |> Enum.map(&(add_team(&1, club)))
     end
   end
@@ -38,20 +39,18 @@ defmodule Mix.Tasks.Scraper.Teams do
 
   defp add_team(team_id, club) do
     Scraper.Team.scrape(team_id)
-    changeset = team_with_name(Scraper.Team.name)
-    |> Team.changeset(%{
-      website_id: team_id,
-      level: Scraper.Team.level,
-      club_id: club.id
-    })
+    changeset = team_with_attributes(%{name: Scraper.Team.name, club_id: club.id, level: Scraper.Team.level})
+    |> Team.changeset(%{ website_id: team_id })
+
     if Scraper.Team.active? && changeset.valid? do
-      Repo.insert_or_update(changeset)
+      Repo.insert_or_update!(changeset)
+      |> Mix.Tasks.Scraper.Games.add_games
     end
   end
 
-  defp team_with_name(name) do
-    case Repo.get_by(Team, name: name) do
-      nil -> %Team{name: name}
+  defp team_with_attributes(attributes) do
+    case Repo.get_by(Team, attributes) do
+      nil -> %Team{} |> Map.merge(attributes)
       team -> team
     end
   end

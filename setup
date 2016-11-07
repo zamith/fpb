@@ -1,0 +1,2 @@
+mix setup
+mix phoenix.server

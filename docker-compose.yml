@@ -1,0 +1,18 @@
+version: '2'
+services:
+  db:
+    image: postgres:9.4
+    environment:
+      POSTGRES_USER: basketball
+      POSTGRES_PASSWORD: basketball
+  web:
+    build: .
+    environment:
+      DATABASE_URL: "postgres://basketball:basketball@db/fpb_prod"
+      PORT: 4000
+    volumes:
+      - .:/fpb
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db

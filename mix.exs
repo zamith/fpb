@@ -32,6 +32,7 @@ defmodule Fpb.Mixfile do
        :phoenix,
        :phoenix_ecto,
        :phoenix_html,
+       :phoenix_pubsub,
        :postgrex,
        :timex,
        :tzdata
@@ -50,13 +51,15 @@ defmodule Fpb.Mixfile do
     [
       {:cowboy, "~> 1.0"},
       {:gettext, "~> 0.9"},
-      {:hound, "~> 0.8"},
-      {:phoenix, "~> 1.1.4"},
-      {:phoenix_ecto, "~> 2.0"},
-      {:phoenix_html, "~> 2.4"},
-      {:phoenix_slime, "~> 0.5.1"},
+      {:hound, "~> 1.0"},
+      {:phoenix, "~> 1.2.1"},
+      {:phoenix_ecto, "~> 3.0.1"},
+      {:phoenix_html, "~> 2.7"},
+      {:phoenix_pubsub, "~> 1.0"},
+      {:phoenix_slime, "~> 0.8.0"},
       {:postgrex, ">= 0.0.0"},
       {:timex, "~> 2.1"},
+      {:timex_ecto, "~> 1.0"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:exvcr, "~> 0.7", only: :test}
     ]
@@ -70,6 +73,7 @@ defmodule Fpb.Mixfile do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"]]
+     "ecto.reset": ["ecto.drop", "ecto.setup"],
+     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end
